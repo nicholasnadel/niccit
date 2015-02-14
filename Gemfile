@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
+
+#Humoring Heroku
+gem 'puma'
+
+ruby '2.2.0'
 
 #beautify
  gem 'bootstrap-sass'
