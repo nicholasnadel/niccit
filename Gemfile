@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 #beautify
  gem 'bootstrap-sass'
 
+#falsify
+gem 'faker'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
