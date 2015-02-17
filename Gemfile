@@ -11,6 +11,8 @@ ruby '2.2.0'
 #falsify
 gem 'faker'
 
+gem 'redcarpet'
+
 #authorization
 gem 'devise'
 gem 'figaro', '1.0'
@@ -25,6 +27,7 @@ gem 'rails', '4.2.0'
  end
  
  group :development do
+  gem "better_errors"
    gem 'sqlite3'
    gem "rails-erd"
  end
