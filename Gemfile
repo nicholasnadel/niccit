@@ -1,12 +1,19 @@
 source 'https://rubygems.org'
+ruby '2.2.0'
 
 #Humoring Heroku
 gem 'puma'
 
-ruby '2.2.0'
+#Uploading images
+gem 'carrierwave'
+gem 'mini_magick', '~> 3.5.0'
+gem 'fog', '~> 1.25.0'
 
 #beautify
  gem 'bootstrap-sass'
+
+ #organize
+ gem 'will_paginate', '~> 3.0.5'
 
 #falsify
 gem 'faker'
@@ -15,7 +22,7 @@ gem 'redcarpet'
 
 #authorization
 gem 'devise'
-gem 'figaro', '1.0'
+gem 'figaro', '~> 1.1.0'
 gem 'pundit'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
