@@ -8,6 +8,7 @@ gem 'puma'
 gem 'carrierwave'
 gem 'mini_magick', '~> 3.5.0'
 gem 'fog', '~> 1.25.0'
+gem 'arel', '~> 6.0.0.beta2'
 
 #beautify
  gem 'bootstrap-sass'
@@ -73,7 +74,6 @@ group :development, :test do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+ gem 'spring'
 end
 
