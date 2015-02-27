@@ -8,7 +8,7 @@
      password: Faker::Lorem.characters(10)
    )
    user.skip_confirmation!
-   user.save
+   user.save!
  end
  users = User.all
 
@@ -23,7 +23,7 @@
 
  # Create Topics
  15.times do
-   Topic.create(
+   Topic.create!(
      name:         Faker::Lorem.sentence,
      description:  Faker::Lorem.paragraph
    )
@@ -32,7 +32,7 @@
 
  # Create Posts
  50.times do
-   post = Post.create(
+   post = Post.create!(
      user:   users.sample,
      topic:  topics.sample,
      title:  Faker::Lorem.sentence,
@@ -40,7 +40,7 @@
    )
 
    # set the created_at to a time within the past year
-   post.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
+   post.update_attributes!(created_at: rand(10.minutes .. 1.year).ago)
    post.update_rank
    post.create_vote
  end
@@ -48,7 +48,7 @@
 
  # Create Comments
  100.times do
-   Comment.create(
+   Comment.create!(
      post: posts.sample,
      user: users.sample,
      body: Faker::Lorem.paragraph
@@ -63,7 +63,7 @@
    role:     'admin'
  )
  admin.skip_confirmation!
- admin.save
+ admin.save!
 
  # Create a moderator
  moderator = User.new(
@@ -73,7 +73,7 @@
    role:     'moderator'
  )
  moderator.skip_confirmation!
- moderator.save
+ moderator.save!
 
  # Create a member
  member = User.new(
@@ -82,7 +82,7 @@
    password: 'helloworld',
  )
  member.skip_confirmation!
- member.save
+ member.save!
 
  puts "Seed finished"
  puts "#{User.count} users created"
