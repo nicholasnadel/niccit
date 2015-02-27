@@ -1,33 +1,48 @@
  require 'rails_helper'
- 
- describe Comment do
- 
-   include TestFactories
- 
-   describe "after_create" do
- 
+
+ describe User do
+
+   describe "#favorited(post)" do
+
+     before do 
+       @user = create(:user)
+       @post = create(:post)
+     end
+
+     it "returns `nil` if the user has not favorited the post" do
+       expect( @user.favorited(@post) ).to eq(nil)
+     end
+
+     it "returns the appropriate favorite if it exists" do
+       favorite = @user.favorites.where(post: @post).create
+       expect( @user.favorited(@post) ).to eq(favorite)
+     end
+   end
+
+   describe ".top_rated" do
+
      before do
-       @post = associated_post
-       @user = authenticated_user
-       @comment = Comment.new(body: 'My comment', post: @post, user_id: 10000)
+       @user1 = create(:user)
+       post = create(:post, user: @user1)
+       create(:comment, user: @user1, post: post)
+       
+       @user2 = create(:user)
+       post = create(:post, user: @user2)
+       2.times { create(:comment, user: @user2, post: post) }
      end
- 
-     it "sends an email to users who have favorited the post" do
-       @user.favorites.where(post: @post).create
- 
-       allow( FavoriteMailer )
-         .to receive(:new_comment)
-         .with(@user, @post, @comment)
-         .and_return( double(deliver: true) )
- 
-       @comment.save
+
+     it "should return users based on comments + posts" do
+       expect( User.top_rated ).to eq([@user2, @user1])
      end
- 
-     it "does not send emails to users who haven't" do
-       expect( FavoriteMailer )
-         .not_to receive(:new_comment)
- 
-       @comment.save
+
+     it "should have `posts_count` on user" do
+       users = User.top_rated
+       expect( users.first.posts_count ).to eq(1)
+     end
+     
+     it "should have `comments_count` on user" do
+       users = User.top_rated
+       expect( users.first.comments_count ).to eq(2)
      end
    end
  end
